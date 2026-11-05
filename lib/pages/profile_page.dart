@@ -42,6 +42,14 @@ class _ProfilePageState extends State<ProfilePage> {
       const SnackBar(content: Text('Profil tersimpan')),
     );
   }
+  Future<void> _reset() async {
+    await widget.prefs.clearProfile();
+    if (!mounted) return;
+    setState(() => _profile = widget.prefs.profile);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Profil dikembalikan ke bawaan')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
             value: widget.isDark,
             onChanged: widget.onThemeChanged,
           ),
+
           // Lab 11 akan menambahkan menu "Proyek Saya" di sini.
           const SizedBox(height: 24),
           Center(

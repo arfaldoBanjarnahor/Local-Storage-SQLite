@@ -38,6 +38,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
+  void _reset() {
+    _formKey.currentState?.reset(); // Reset validasi form
+    setState(() {
+      // Kosongkan isi text field atau kembalikan ke default
+      _name.text = '';
+      _title.text = '';
+      _bio.text = '';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +86,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             const SizedBox(height: 24),
             FilledButton(onPressed: _submit, child: const Text('Simpan')),
+
+          const SizedBox(height: 12),
+
+            OutlinedButton.icon(
+              onPressed: _reset,
+              icon: const Icon(Icons.restore),
+              label: const Text('Reset Profil'),
+            ),
           ],
         ),
       ),
